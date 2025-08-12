@@ -1,3 +1,12 @@
+## [5.0.9](https://github.com/nolanlawson/fuite/compare/v5.0.8...v5.0.9) (2025-08-12)
+
+
+### Bug Fixes
+
+* fix objects with bogus prototypes ([#131](https://github.com/nolanlawson/fuite/issues/131)) ([930629e](https://github.com/nolanlawson/fuite/commit/930629ecd9147c7f9df92ba925f023e74d3ded7e))
+
+
+
 ## [5.0.8](https://github.com/nolanlawson/fuite/compare/v5.0.7...v5.0.8) (2025-08-03)
 
 
