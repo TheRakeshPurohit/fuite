@@ -22,32 +22,37 @@ export async function startTrackingCollections (page) {
 
       // Via https://github.com/jonschlinkert/is-plain-object/blob/0a47f0f/is-plain-object.js
       function isPlainObject (o) {
-        function isObject (o) {
-          return toString.call(o) === '[object Object]'
-        }
-        if (isObject(o) === false) {
-          return false
-        }
+        try {
+          function isObject (o) {
+            return toString.call(o) === '[object Object]'
+          }
+          if (isObject(o) === false) {
+            return false
+          }
 
-        // If has modified constructor
-        const ctor = o.constructor
-        if (ctor === undefined) {
+          // If has modified constructor
+          const ctor = o.constructor
+          if (ctor === undefined) {
+            return true
+          }
+
+          // If has modified prototype
+          const prot = ctor.prototype
+          if (isObject(prot) === false) {
+            return false
+          }
+
+          // If constructor does not have an Object-specific method
+          if (hasOwnProperty.call(prot, 'isPrototypeOf') === false) {
+            return false
+          }
+
+          // Most likely a plain Object
           return true
-        }
-
-        // If has modified prototype
-        const prot = ctor.prototype
-        if (isObject(prot) === false) {
+        } catch (err) {
+          // if anything throws, bail out and decide it's not a plain object
           return false
         }
-
-        // If constructor does not have an Object-specific method
-        if (hasOwnProperty.call(prot, 'isPrototypeOf') === false) {
-          return false
-        }
-
-        // Most likely a plain Object
-        return true
       }
 
       function getSize (obj) {
